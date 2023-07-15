@@ -12,7 +12,6 @@ function ExpensesForm() {
 
     const handleInputChange= (event) => {
         const inputName = event.target.name;
-        console.log(inputName)
         if(event.target.name === 'title') {
             setInputChange((prev) => ({ ...prev, title: event.target.value}));
         }else if(inputName === 'amount') {
@@ -21,10 +20,9 @@ function ExpensesForm() {
             setInputChange((prev) => ({ ...prev, date: event.target.value}));
         }
     }
-    console.log(inputChange);
 
   return (
-    <form>
+    <form onSub>
         <div className='new-expense__controls'>
             <div className="new-expense__control">
                 <label htmlFor="title">Title: </label>
