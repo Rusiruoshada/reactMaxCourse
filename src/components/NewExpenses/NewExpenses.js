@@ -3,10 +3,19 @@ import './NewExpenses.css';
 import ExpensesForm from './ExpensesForm';
 
 
-function NewExpenses() {
+function NewExpenses({getData}) {
+
+  const saveData = (enterData) => {
+    const enterInputs = {
+      ...enterData,
+      id: Math.random().toString(),
+    }
+    getData(enterInputs);
+  }
+
   return (
     <div className='new-expense'>
-        <ExpensesForm />
+        <ExpensesForm onSaveSubmitData={saveData}/>
     </div>
   )
 }

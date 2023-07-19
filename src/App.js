@@ -26,6 +26,12 @@ const App = () => {
     },
   ];
 
+  const getDataFromExpenses = (enterInputs) => {
+      console.log('app dir');
+      console.log(enterInputs);
+  };
+
+
   // return React.createElement(
   //   'div',
   //   {},
@@ -36,7 +42,7 @@ const App = () => {
   return (
     <div>
       <h2>Let's get started!</h2>
-      <NewExpenses />
+      <NewExpenses getData={getDataFromExpenses}/>
       <Expenses items={expenses} />
     </div>
   );
