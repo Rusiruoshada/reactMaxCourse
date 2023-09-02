@@ -12,14 +12,15 @@ function ExpensesForm({onSaveSubmitData}) {
 
     const handleInputChange= (event) => {
         const inputName = event.target.name;
-        if(event.target.name === 'title') {
+        if(inputName === 'title') {
             setInputChange((prev) => ({ ...prev, title: event.target.value}));
         }else if(inputName === 'amount') {
             setInputChange((prev) => ({ ...prev,amount: event.target.value}));
         }else if(inputName === 'date') {
-            setInputChange((prev) => ({ ...prev, date: event.target.value}));
+            setInputChange((prev) => ({ ...prev, date:new Date(event.target.value)}));
         }
     }
+    console.log(typeof(inputChange.date));
 
     const submitHandle = (event) => {
         event.preventDefault();
@@ -45,7 +46,7 @@ function ExpensesForm({onSaveSubmitData}) {
             </div>
             <div className="new-expense__control">
                 <label htmlFor="date">Date: </label>
-                <input type='date' id='date' value={inputChange.date} min='2019-01-01' max='2025-12-31' onChange={handleInputChange} name='date'/>
+                <input type='date' id='date' min='2019-01-01' max='2023-12-31' onChange={handleInputChange} name='date'/>
             </div>
         </div>
         <div className='new-expense__actions'>
