@@ -12,15 +12,19 @@ function ExpensesForm({onSaveSubmitData}) {
 
     const handleInputChange= (event) => {
         const inputName = event.target.name;
-        if(inputName === 'title') {
-            setInputChange((prev) => ({ ...prev, title: event.target.value}));
-        }else if(inputName === 'amount') {
-            setInputChange((prev) => ({ ...prev,amount: event.target.value}));
-        }else if(inputName === 'date') {
+        // if(inputName === 'title') {
+        //     setInputChange((prev) => ({ ...prev, title: event.target.value}));
+        // }else if(inputName === 'amount') {
+        //     setInputChange((prev) => ({ ...prev,amount: event.target.value}));
+        // }else 
+        if(inputName === 'date') {
             setInputChange((prev) => ({ ...prev, date:new Date(event.target.value)}));
+        }else{
+            setInputChange((prev) => ({
+                ...prev, [inputName]: event.target.value
+            }))
         }
     }
-    console.log(typeof(inputChange.date));
 
     const submitHandle = (event) => {
         event.preventDefault();
