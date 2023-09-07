@@ -57,7 +57,7 @@ function ExpensesForm({onSaveSubmitData}) {
                 <input type='date' id='date' min='2019-01-01' max='2023-12-31' onChange={handleInputChange} name='date'/>
             </div>
         </div>
-            <button className='new-expense__actions' type="submit">Add Expenses</button>
+        <button className='new-expense__actions' type="submit">Add Expenses</button>
         </>)}
         <button type='button' onClick={show}>{visible?"Cancel":'New Expenses'}</button>
     </form>
