@@ -12,11 +12,7 @@ function ExpensesForm({onSaveSubmitData}) {
 
     const handleInputChange= (event) => {
         const inputName = event.target.name;
-        // if(inputName === 'title') {
-        //     setInputChange((prev) => ({ ...prev, title: event.target.value}));
-        // }else if(inputName === 'amount') {
-        //     setInputChange((prev) => ({ ...prev,amount: event.target.value}));
-        // }else 
+
         if(inputName === 'date') {
             setInputChange((prev) => ({ ...prev, date:new Date(event.target.value)}));
         }else{
@@ -37,9 +33,17 @@ function ExpensesForm({onSaveSubmitData}) {
 
     }
 
+    const [visible, setVisible] = useState(false);
+
+    const show = () => {
+      setVisible(!visible)
+    }
+
   return (
     <form onSubmit={submitHandle}>
+        {visible && (<>
         <div className='new-expense__controls'>
+           
             <div className="new-expense__control">
                 <label htmlFor="title">Title: </label>
                 <input type='text' id='title' value={inputChange.title} onChange={handleInputChange} name='title' />
@@ -53,9 +57,9 @@ function ExpensesForm({onSaveSubmitData}) {
                 <input type='date' id='date' min='2019-01-01' max='2023-12-31' onChange={handleInputChange} name='date'/>
             </div>
         </div>
-        <div className='new-expense__actions'>
-            <button type="submit">Add Expenses</button>
-        </div>
+            <button className='new-expense__actions' type="submit">Add Expenses</button>
+        </>)}
+        <button type='button' onClick={show}>{visible?"Cancel":'New Expenses'}</button>
     </form>
   )
 }
