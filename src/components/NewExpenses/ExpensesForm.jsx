@@ -52,8 +52,7 @@ function ExpensesForm({onSaveSubmitData}) {
 
     const reset = () => {
         setObjectEmpty(false);
-        Object.values(inputChange).map(item => inputChange.item='')
-        console.log(inputChange)
+        setInputChange({title: '', amount: '', date: ''})
     }
 
   return (
