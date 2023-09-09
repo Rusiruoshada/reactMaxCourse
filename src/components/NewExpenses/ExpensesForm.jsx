@@ -8,11 +8,12 @@ function ExpensesForm({onSaveSubmitData}) {
         title:'',
         amount: '',
         date: '',
-    })
+    });
+    const [ObjectEmpty, setObjectEmpty] = useState(false);
 
     const handleInputChange= (event) => {
         const inputName = event.target.name;
-
+        
         if(inputName === 'date') {
             setInputChange((prev) => ({ ...prev, date:new Date(event.target.value)}));
         }else{
@@ -20,10 +21,20 @@ function ExpensesForm({onSaveSubmitData}) {
                 ...prev, [inputName]: event.target.value
             }))
         }
+        for(let i = 0; i < Object.keys(inputChange).length; i++ ){
+            if(Object.values(inputChange)[i].length > 0){
+                setObjectEmpty(false);
+        }}
     }
 
     const submitHandle = (event) => {
         event.preventDefault();
+        for(let i = 0; i < Object.keys(inputChange).length; i++ ){
+            if(Object.values(inputChange)[i] === '') {
+                setObjectEmpty(true);
+                return;
+            }
+        }
         onSaveSubmitData(inputChange);
         setInputChange({
             title:'',
@@ -37,6 +48,12 @@ function ExpensesForm({onSaveSubmitData}) {
 
     const show = () => {
       setVisible(!visible)
+    }
+
+    const reset = () => {
+        setObjectEmpty(false);
+        Object.values(inputChange).map(item => inputChange.item='')
+        console.log(inputChange)
     }
 
   return (
@@ -54,14 +71,16 @@ function ExpensesForm({onSaveSubmitData}) {
             </div>
             <div className="new-expense__control">
                 <label htmlFor="date">Date: </label>
-                <input type='date' id='date' min='2019-01-01' max='2023-12-31' onChange={handleInputChange} name='date' value={submitHandle && ''}/>
+                <input type='date' id='date' min='2019-01-01' max='2023-12-31' onChange={handleInputChange} name='date' value={submitHandle && ''} />
             </div>
         </div>
+        {ObjectEmpty && (<p style={{color: 'red',backgroundColor:'lightpink'}}>Sorry, Invalid Input!</p>)}
         <button className='new-expense__actions' type="submit">Add Expenses</button>
+        <button type='reset' onClick={reset}>Reset</button>
         </>)}
         <button type='button' onClick={show}>{visible?"Cancel":'New Expenses'}</button>
     </form>
   )
 }
 
-export default ExpensesForm
+export default ExpensesForm;
